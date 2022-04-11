@@ -1,0 +1,17 @@
+version: '3.1'
+
+volumes:
+  postgres:
+
+services:
+
+  postgresdb:
+    image: postgres
+    restart: always
+    volumes:
+      - /home/andrey/Python/django_movie/datadir:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: andrey
+      POSTGRES_PASSWORD: 25jk8Dety
