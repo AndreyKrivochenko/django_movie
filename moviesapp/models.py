@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.db import models
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -51,7 +52,7 @@ class Movie(models.Model):
     title = models.CharField('Название', max_length=150)
     tagline = models.CharField('Слоган', max_length=150, default='')
     description = models.TextField('Описание')
-    poster = models.ImageField('Постер', upload_to='movies/')
+    poster = models.ImageField('Постер', upload_to='moviesapp/')
     year = models.PositiveSmallIntegerField('Год выхода', default='2022')
     country = models.CharField('Страна', max_length=100)
     directors = models.ManyToManyField(Actor, verbose_name='Режиссеры', related_name='film_director')
@@ -67,6 +68,9 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("movie_detail", kwargs={"slug": self.url})
 
     class Meta:
         verbose_name = 'Фильм'
